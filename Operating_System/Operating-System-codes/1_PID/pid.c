@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 
     // Get current Process PID
     pid_t pid = getpid();
-    printf("My pid: %lld\n", pid);
+    printf("My pid: %d\n", pid);
 
     exit(0);
 }
