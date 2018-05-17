@@ -11,7 +11,7 @@ _by Yandex_
 ## Cloud Computing Specialization
 _by University of Illinois at Urbana-Champaign_
 
-1. Cloud Computing Concepts, Part 1
+1. Cloud Computing Concepts, Part 1 [[__Completed__](https://www.coursera.org/account/accomplishments/certificate/J85FVYZ5CPRJ)]
 2. Cloud Computing Concepts, Part 2
 3. Cloud Computing Applications, Part 1: Cloud Systems and Infrastructure
 4. Cloud Computing Applications, Part 2: Big Data and Applications in the Cloud
