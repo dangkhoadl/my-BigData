@@ -31,6 +31,7 @@
 enum MsgTypes{
     JOINREQ,
     JOINREP,
+    HEARTBEAT,
     DUMMYLASTMSGTYPE
 };
 
@@ -42,6 +43,17 @@ enum MsgTypes{
 typedef struct MessageHdr {
 	enum MsgTypes msgType;
 }MessageHdr;
+
+/**
+ * STRUCT NAME: MessageData
+ *
+ * DESCRIPTION: Message data: id, port, heartbeat
+ */
+typedef struct MessageData {
+	int id;
+	short port;
+	long heartbeat;
+}MessageData;
 
 /**
  * CLASS NAME: MP1Node
@@ -66,16 +78,23 @@ public:
 	void nodeStart(char *servaddrstr, short serverport);
 	int initThisNode(Address *joinaddr);
 	int introduceSelfToGroup(Address *joinAddress);
-	int finishUpThisNode();
+	int finishUpThisNode();   								/* CODE HERE */
 	void nodeLoop();
 	void checkMessages();
-	bool recvCallBack(void *env, char *data, int size);
-	void nodeLoopOps();
+	bool recvCallBack(void *env, char *data, int size); 	/* CODE HERE */
+	void nodeLoopOps();										/* CODE HERE */
 	int isNullAddress(Address *addr);
 	Address getJoinAddress();
 	void initMemberListTable(Member *memberNode);
 	void printAddress(Address *addr);
 	virtual ~MP1Node();
+
+	// my implementations
+	bool isAddressTheSameAsMemberNodeAddress(Address *address);
+	bool checkIfIdInMemberListTable(int id);
+	void sendJOINREPMessage(int id, short port);
+	void sendHeartBeatMessage(Address *destinationAddr);
+	void addNewNodeToMemberListTable(int id, short port, long heartbeat, long timestamp);
 };
 
 #endif /* _MP1NODE_H_ */
