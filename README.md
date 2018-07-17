@@ -13,7 +13,7 @@ _by University of Illinois at Urbana-Champaign_
 
 1. Cloud Computing Concepts, Part 1 [[__Completed__](https://www.coursera.org/account/accomplishments/certificate/J85FVYZ5CPRJ)]
 2. Cloud Computing Concepts, Part 2
-3. Cloud Computing Applications, Part 1: Cloud Systems and Infrastructure
+3. Cloud Computing Applications, Part 1: Cloud Systems and Infrastructure [[__Completed__](https://www.coursera.org/account/accomplishments/certificate/EHVU4Z63LDPE)]
 4. Cloud Computing Applications, Part 2: Big Data and Applications in the Cloud
 5. Cloud Networking
 6. Cloud Computing Project
