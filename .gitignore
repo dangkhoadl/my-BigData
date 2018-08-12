@@ -4,3 +4,4 @@
 *floyd.yml
 *.floydexpt
 *.floydignore
+*spark-warehouse
