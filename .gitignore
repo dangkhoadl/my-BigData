@@ -5,3 +5,5 @@
 *.floydexpt
 *.floydignore
 *spark-warehouse
+*.txt
+*.csv
