@@ -1,5 +1,0 @@
-Parent pid: 4685
-[4686] child
-Parent pid: 4685
-[4685] parent of [4686] 
-[4685] bye 4686
