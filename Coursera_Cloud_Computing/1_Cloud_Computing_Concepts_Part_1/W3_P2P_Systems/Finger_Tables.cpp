@@ -3,35 +3,56 @@
 // Algo
 // 			successor( (n + 2^i) mod 2^m )
 
-int consistent_hash(int n, int i, int m) {
-    return ((n + static_cast<int>(pow(2,i))) % static_cast<int>(pow(2,m)));
-}
-int succ(int id, int hashVal, vector<int> nodes) {
-    for(int i=0; i<nodes.size()-1; ++i) {
-        if(hashVal>nodes[i] && hashVal<=nodes[i+1] && id!=nodes[i+1]) {
-            return nodes[i+1];
+class Chord {
+private:
+    // Chord config Parameters
+    int m;
+    vector<int> nodes;
+
+    // Finger tables
+    //      node_id: 
+    //          (0, next_node)
+    //          (1, next_node)
+    //               ...
+    //          (m-1, next_node)
+    unordered_map<int, map<int,int>> finger_table;
+private:
+    inline int pow2(int k) {
+        return (1 << k);
+    }
+    int hash(int n, int i) {
+        return (n + pow2(i)) % pow2(m);
+    }
+    int succ(int hash_val) { // O(log(n))
+        auto it = upper_bound(nodes.begin(), nodes.end(), hash_val);
+
+        // If hash_val == node: return node
+        if(it != nodes.begin() && *prev(it) == hash_val) return hash_val;
+
+        // Else Return successor
+        return it == nodes.end() ? nodes[0] : *it;
+    }
+public:
+    // Config
+    Chord(vector<int> nodes, int m) : nodes(nodes), m(m) {
+        // Sort Nodes increasing
+        sort(this->nodes.begin(), this->nodes.end());
+
+        // build Finger table
+        this->finger_table.clear();
+        this->build_finger_table();
+    }
+    void build_finger_table() {
+        for(const auto &node: nodes) {
+            map<int, int> entry;
+            int next_node;
+
+            for(int i=0; i<m; ++i) {
+                next_node = succ(hash(node, i)); 
+                entry[i] = next_node;
+            }
+
+            finger_table[node] = entry;
         }
     }
-    if(nodes[0] != id) {
-        return nodes[0];
-    }
-    return nodes[1];
-}
-
-// Build finger tables
-unordered_map<int, map<int,int>> build(int m, vector<int> nodes) {
-    unordered_map<int, map<int,int>> tables;
-
-    // Sort
-    sort(nodes.begin(), nodes.end()); 
-
-    for(int t=0; t<nodes.size(); ++t) {
-        map<int, int> table;
-        for(int i=0; i<m; ++i) {
-            table.insert({i, succ(nodes[t], consistent_hash(nodes[t], i, m), nodes)});
-        }
-        tables.insert({nodes[t], table});
-    }
-
-    return tables;
-}
+};
